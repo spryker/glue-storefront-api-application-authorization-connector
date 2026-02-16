@@ -1,2 +1,6 @@
 parameters:
     level: 8
+    ignoreErrors:
+        # Type narrowing via instanceof checks is verified at runtime in isApplicable()
+        -
+            identifier: varTag.nativeType
