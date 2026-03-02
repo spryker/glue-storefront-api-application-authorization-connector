@@ -43,19 +43,11 @@ class ProtectedPathAuthorizationChecker implements ProtectedPathAuthorizationChe
      */
     protected $glueStorefrontApiApplicationAuthorizationConfig;
 
-    /**
-     * @param \Spryker\Client\GlueStorefrontApiApplicationAuthorizationConnector\GlueStorefrontApiApplicationAuthorizationConnectorConfig $glueStorefrontApiApplicationAuthorizationConfig
-     */
     public function __construct(GlueStorefrontApiApplicationAuthorizationConnectorConfig $glueStorefrontApiApplicationAuthorizationConfig)
     {
         $this->glueStorefrontApiApplicationAuthorizationConfig = $glueStorefrontApiApplicationAuthorizationConfig;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AuthorizationRequestTransfer $authorizationRequestTransfer
-     *
-     * @return bool
-     */
     public function authorize(AuthorizationRequestTransfer $authorizationRequestTransfer): bool
     {
         $requestData = $authorizationRequestTransfer->getEntityOrFail()->getData();
@@ -76,11 +68,6 @@ class ProtectedPathAuthorizationChecker implements ProtectedPathAuthorizationChe
         return (bool)$authorizationRequestTransfer->getIdentityOrFail()->getIdentifier();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RouteTransfer $routeTransfer
-     *
-     * @return bool
-     */
     public function isProtected(RouteTransfer $routeTransfer): bool
     {
         $protectedPaths = $this->glueStorefrontApiApplicationAuthorizationConfig->getProtectedPaths();

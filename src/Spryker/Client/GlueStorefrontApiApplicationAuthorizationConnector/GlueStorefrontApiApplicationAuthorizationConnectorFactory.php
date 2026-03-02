@@ -18,17 +18,11 @@ use Spryker\Client\Kernel\AbstractFactory;
  */
 class GlueStorefrontApiApplicationAuthorizationConnectorFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Client\GlueStorefrontApiApplicationAuthorizationConnector\Processor\ProtectedPathAuthorization\Checker\ProtectedPathAuthorizationCheckerInterface
-     */
     public function createProtectedPathAuthorizationChecker(): ProtectedPathAuthorizationCheckerInterface
     {
         return new ProtectedPathAuthorizationChecker($this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Client\GlueStorefrontApiApplicationAuthorizationConnector\Processor\ProtectedPathAuthorization\Expander\ProtectedPathAuthorizationExpanderInterface
-     */
     public function createProtectedPathAuthorizationExpander(): ProtectedPathAuthorizationExpanderInterface
     {
         return new ProtectedPathAuthorizationExpander($this->createProtectedPathAuthorizationChecker());

@@ -20,9 +20,6 @@ use Spryker\Glue\Kernel\AbstractFactory;
  */
 class GlueStorefrontApiApplicationAuthorizationConnectorFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\Processor\AuthorizationValidator\AuthorizationValidatorInterface
-     */
     public function createAuthorizationValidator(): AuthorizationValidatorInterface
     {
         return new AuthorizationValidator(
@@ -32,9 +29,6 @@ class GlueStorefrontApiApplicationAuthorizationConnectorFactory extends Abstract
         );
     }
 
-    /**
-     * @return \Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\Dependency\Client\GlueStorefrontApiApplicationAuthorizationConnectorToAuthorizationClientInterface
-     */
     public function getAuthorizationClient(): GlueStorefrontApiApplicationAuthorizationConnectorToAuthorizationClientInterface
     {
         return $this->getProvidedDependency(GlueStorefrontApiApplicationAuthorizationConnectorDependencyProvider::CLIENT_AUTHORIZATION);
@@ -51,17 +45,11 @@ class GlueStorefrontApiApplicationAuthorizationConnectorFactory extends Abstract
         ];
     }
 
-    /**
-     * @return \Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\ConfigExtractorStrategy\ConfigExtractorStrategyInterface
-     */
     public function createAuthorizationStrategyAwareResourceRoutePluginConfigExtractorStrategy(): ConfigExtractorStrategyInterface
     {
         return new AuthorizationStrategyAwareResourceRoutePluginConfigExtractorStrategy();
     }
 
-    /**
-     * @return \Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\ConfigExtractorStrategy\ConfigExtractorStrategyInterface
-     */
     public function createDefaultAuthorizationStrategyAwareResourceRoutePluginConfigExtractorStrategy(): ConfigExtractorStrategyInterface
     {
         return new DefaultAuthorizationStrategyAwareResourceRoutePluginConfigExtractorStrategy();

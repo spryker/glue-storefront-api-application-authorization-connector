@@ -51,9 +51,6 @@ class GlueStorefrontApiApplicationAuthorizationConnectorTester extends Actor
             );
     }
 
-    /**
-     * @return \Spryker\Client\GlueStorefrontApiApplicationAuthorizationConnector\GlueStorefrontApiApplicationAuthorizationConnectorFactory
-     */
     public function createGlueStorefrontApiApplicationAuthorizationConnectorFactory(): GlueStorefrontApiApplicationAuthorizationConnectorFactory
     {
         return new GlueStorefrontApiApplicationAuthorizationConnectorFactory();

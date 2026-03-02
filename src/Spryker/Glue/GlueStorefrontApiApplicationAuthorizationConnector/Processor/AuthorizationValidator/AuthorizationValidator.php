@@ -78,12 +78,6 @@ class AuthorizationValidator implements AuthorizationValidatorInterface
         $this->glueStorefrontApiApplicationAuthorizationConfig = $glueStorefrontApiApplicationAuthorizationConfig;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\GlueRequestTransfer $glueRequestTransfer
-     * @param \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceInterface $resource
-     *
-     * @return \Generated\Shared\Transfer\GlueRequestValidationTransfer
-     */
     public function validate(GlueRequestTransfer $glueRequestTransfer, ResourceInterface $resource): GlueRequestValidationTransfer
     {
         if ($glueRequestTransfer->getMethod() === Request::METHOD_OPTIONS) {
@@ -215,20 +209,11 @@ class AuthorizationValidator implements AuthorizationValidatorInterface
         return $this->createDefaultGlueRequestNotValidationTransfer();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\GlueRequestValidationTransfer
-     */
     protected function createDefaultGlueRequestValidationTransfer(): GlueRequestValidationTransfer
     {
         return (new GlueRequestValidationTransfer())->setIsValid(true);
     }
 
-    /**
-     * @param string|null $validationErrorMessage
-     * @param int|null $status
-     *
-     * @return \Generated\Shared\Transfer\GlueRequestValidationTransfer
-     */
     protected function createDefaultGlueRequestNotValidationTransfer(?string $validationErrorMessage = null, ?int $status = null): GlueRequestValidationTransfer
     {
         $validationErrorMessage = $validationErrorMessage ?? static::ERROR_MESSAGE_UNAUTHORIZED_REQUEST;
