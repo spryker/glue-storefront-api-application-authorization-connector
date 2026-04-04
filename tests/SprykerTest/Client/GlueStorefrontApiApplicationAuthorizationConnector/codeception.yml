@@ -19,3 +19,4 @@ suites:
             enabled:
                 - Asserts
                 - \SprykerTest\Client\Testify\Helper\ConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
