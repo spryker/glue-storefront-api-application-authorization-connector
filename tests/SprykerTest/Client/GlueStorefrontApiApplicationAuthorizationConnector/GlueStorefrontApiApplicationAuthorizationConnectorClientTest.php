@@ -294,6 +294,51 @@ class GlueStorefrontApiApplicationAuthorizationConnectorClientTest extends Unit
         $this->assertTrue($result);
     }
 
+    public function testIsProtectedReturnsTrueWhenGetCollectionResourceMethodConfiguredAndGetHttpMethodUsed(): void
+    {
+        // Arrange
+        $client = $this->getGlueStorefrontApiApplicationAuthorizationConnectorClient([
+            '/testRoute' => [
+                static::IS_REGULAR_EXPRESSION => false,
+                static::METHODS => [
+                    'getCollection',
+                ],
+            ],
+        ]);
+        $routeTransfer = (new RouteTransfer())
+            ->setRoute('/testRoute')
+            ->setMethod('GET');
+
+        // Act
+        $result = $client->isProtected($routeTransfer);
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    public function testAuthorizeReturnsFalseForAnonymousRequestWhenGetCollectionResourceMethodConfigured(): void
+    {
+        // Arrange
+        $client = $this->getGlueStorefrontApiApplicationAuthorizationConnectorClient([
+            '/testRoute' => [
+                static::IS_REGULAR_EXPRESSION => false,
+                static::METHODS => [
+                    'getCollection',
+                ],
+            ],
+        ]);
+        $authorizationRequestTransfer = $this->tester->createAuthorizationRequestTransfer([
+            static::METHOD => 'GET',
+            static::PATH => '/testRoute',
+        ]);
+
+        // Act
+        $result = $client->authorize($authorizationRequestTransfer);
+
+        // Assert
+        $this->assertFalse($result);
+    }
+
     public function testExpandApiApplicationSchemaContextDeclaredMethodsIsProtected(): void
     {
         //Arrange

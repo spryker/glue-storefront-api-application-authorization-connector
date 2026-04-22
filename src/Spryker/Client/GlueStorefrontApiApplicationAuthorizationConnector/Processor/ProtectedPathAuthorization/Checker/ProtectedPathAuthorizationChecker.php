@@ -39,6 +39,13 @@ class ProtectedPathAuthorizationChecker implements ProtectedPathAuthorizationChe
     protected const IS_REGULAR_EXPRESSION = 'isRegularExpression';
 
     /**
+     * @var array<string, string>
+     */
+    protected const RESOURCE_METHOD_TO_HTTP_METHOD_MAP = [
+        'getCollection' => 'get',
+    ];
+
+    /**
      * @var \Spryker\Client\GlueStorefrontApiApplicationAuthorizationConnector\GlueStorefrontApiApplicationAuthorizationConnectorConfig
      */
     protected $glueStorefrontApiApplicationAuthorizationConfig;
@@ -122,11 +129,22 @@ class ProtectedPathAuthorizationChecker implements ProtectedPathAuthorizationChe
             return true;
         }
 
-        if (in_array(strtolower($method), $protectedPath[static::METHODS])) {
-            return true;
-        }
+        $normalizedMethods = $this->normalizeMethodNames($protectedPath[static::METHODS]);
 
-        return false;
+        return in_array(strtolower($method), $normalizedMethods, true);
+    }
+
+    /**
+     * @param array<string> $methods
+     *
+     * @return array<string>
+     */
+    protected function normalizeMethodNames(array $methods): array
+    {
+        return array_map(
+            static fn (string $method): string => static::RESOURCE_METHOD_TO_HTTP_METHOD_MAP[$method] ?? $method,
+            $methods,
+        );
     }
 
     /**
